@@ -40,5 +40,4 @@ ext {
     life_cycle_version='1.1.1'
     mockitoKotlin='2.0.0-RC1'
     koin='0.9.3'
-    retrofit2_coroutines_adapter='0.9.0'
 }
