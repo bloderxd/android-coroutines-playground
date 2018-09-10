@@ -1,4 +1,4 @@
-package bloder.com.domain
+package bloder.com.domain.api
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
