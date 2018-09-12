@@ -9,4 +9,4 @@ pluginManagement {
         }
     }
 }
-include ':app', ':domain'
+include ':app', ':domain', ':presentation'
