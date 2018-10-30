@@ -4,5 +4,5 @@ import bloder.com.domain.values.Search
 
 sealed class SearchState {
 
-    class onSearched(val search: Search) : SearchState()
+    class OnSearched(val search: Search) : SearchState()
 }

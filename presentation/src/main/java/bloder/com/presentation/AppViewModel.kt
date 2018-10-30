@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import bloder.com.domain.UseCase
 import kotlinx.coroutines.*
-import kotlinx.coroutines.android.Main
 import kotlin.coroutines.CoroutineContext
 
 open class AppViewModel<State> : ViewModel(), CoroutineScope {

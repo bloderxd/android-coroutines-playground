@@ -4,7 +4,7 @@ import kotlinx.coroutines.*
 
 open class UseCase {
 
-    suspend fun <T> execute(action: suspend () -> T) : T = currentScope {
+    suspend fun <T> execute(action: suspend () -> T) : T = coroutineScope {
         async(Dispatchers.IO) { action() }.await()
     }
 }
