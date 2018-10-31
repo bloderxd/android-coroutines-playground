@@ -1,10 +1,12 @@
 package bloder.com.domain
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
-open class UseCase {
+class UseCase {
 
-    suspend fun <T> execute(action: suspend () -> T) : T = coroutineScope {
+    suspend fun <T> execute(action: suspend () -> T) : T = GlobalScope.async {
         async(Dispatchers.IO) { action() }.await()
-    }
+    }.await()
 }

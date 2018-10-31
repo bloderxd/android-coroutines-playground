@@ -1,6 +1,6 @@
 package bloder.com.domain.payloads
 
-typealias Binder<R, E> = Response<R, E>
+typealias Result<R, E> = Response<R, E>
 
 class Response<R, E>(
         val response: R?,

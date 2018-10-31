@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeChanges() {
         viewModel.state().observe(this, Observer<SearchState> { when(it) {
             is SearchState.OnSearched -> text.text = it.search.name
+            is SearchState.OnError -> text.text = "Error hue"
         }})
     }
 }

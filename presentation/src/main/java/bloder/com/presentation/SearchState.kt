@@ -5,4 +5,5 @@ import bloder.com.domain.values.Search
 sealed class SearchState {
 
     class OnSearched(val search: Search) : SearchState()
+    object OnError : SearchState()
 }
