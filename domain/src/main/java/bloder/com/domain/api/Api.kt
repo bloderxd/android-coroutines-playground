@@ -9,11 +9,11 @@ import java.util.concurrent.TimeUnit
 
 abstract class Api<T> {
 
-    protected fun retrofit(endPoint: String): Retrofit = Retrofit.Builder()
+    protected fun retrofit(): Retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(createClientBuilder())
-            .baseUrl(endPoint)
+            .baseUrl("https://jsonplaceholder.typicode.com/")
             .build()
 
     abstract fun service() : T
