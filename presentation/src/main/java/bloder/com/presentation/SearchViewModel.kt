@@ -4,18 +4,7 @@ import bloder.com.domain.search
 
 class SearchViewModel : AppViewModel<SearchState>() {
 
-    fun search() = run {
-        searchUser()
-    } exception {
-        dispatch(SearchState.OnError)
-    }
-
-    private suspend fun searchUser() = interactor.search().onResponse {
-        on200 {
-            dispatch(SearchState.OnSearched(it))
-        }
-        onUnknownResponse {
-
-        }
-    }
+    fun search() = runInBackground {
+        dispatch(SearchState.OnSearched(interactor.search()))
+    } onError { when(it) {}}
 }

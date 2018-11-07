@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         search_button.setOnClickListener {
-            viewModel.search("")
+            viewModel.search()
         }
         observeChanges()
     }

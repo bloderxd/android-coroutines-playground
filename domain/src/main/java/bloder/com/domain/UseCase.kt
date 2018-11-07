@@ -6,7 +6,7 @@ import kotlinx.coroutines.async
 
 class UseCase {
 
-    suspend fun <T> execute(action: suspend () -> T) : T = GlobalScope.async {
+    suspend fun <T> runAsync(action: suspend () -> T) : T = GlobalScope.async {
         async(Dispatchers.IO) { action() }.await()
     }.await()
 }

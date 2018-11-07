@@ -25,11 +25,11 @@ open class AppViewModel<State> : ViewModel(), CoroutineScope {
         this.state.postValue(state)
     }
 
-    protected fun run(run: suspend () -> Unit) : CoroutineAction = CoroutineAction(run)
+    protected fun runInBackground(run: suspend () -> Unit) : CoroutineAction = CoroutineAction(run)
 
-    protected infix fun CoroutineAction.exception(onError: (Exception) -> Unit) = launch { withContext(Dispatchers.Main) {
+    protected infix fun CoroutineAction.onError(onError: (Exception) -> Unit) = launch { withContext(Dispatchers.Main) {
         try {
-            this@exception.action()
+            this@onError.action()
         } catch (e: Exception) {
             onError(e)
         }
