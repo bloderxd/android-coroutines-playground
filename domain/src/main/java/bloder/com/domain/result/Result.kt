@@ -4,7 +4,7 @@ inline class Result<out T>(private val value: Any?) {
 
     companion object {
         inline fun <T> ok(value: T) : Result<T> = Result(value)
-        inline fun error(exception: Exception) : Result<Failure> = Result(Failure(exception))
+        inline fun <T> error(exception: Exception) : Result<T> = Result(Failure(exception))
     }
 
     fun get() : Any? = value

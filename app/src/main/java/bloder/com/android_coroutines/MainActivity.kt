@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         search_button.setOnClickListener {
             viewModel.search()
+            viewModel.search2()
         }
         observeChanges()
     }
@@ -24,7 +25,11 @@ class MainActivity : AppCompatActivity() {
     private fun observeChanges() {
         viewModel.state().observe(this, Observer<SearchState> { when(it) {
             is SearchState.OnSearched -> text.text = it.search.name
+            is SearchState.OnSearched2 -> text_2.text = it.search.name
             is SearchState.OnError -> text.text = "Error hue"
+            is SearchState.OnError2 -> text_2.text = "Error 2"
+            is SearchState.HttpError -> text.text = it.reason
+            is SearchState.HttpError2 -> text_2.text = it.reason
         }})
     }
 }

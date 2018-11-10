@@ -25,11 +25,15 @@ open class AppViewModel<State> : ViewModel(), CoroutineScope {
         this.state.postValue(state)
     }
 
-    protected fun runInBackground(run: suspend () -> Unit) : CoroutineAction = CoroutineAction(run)
+    protected fun runInBackground(run: suspend () -> Unit) = initCoroutine(run)
 
-    protected infix fun CoroutineAction.onError(onError: (Exception) -> Unit) = launch { withContext(Dispatchers.Main) {
+    protected fun runInBackgroundWithException(run: suspend () -> Unit) : CoroutineAction = CoroutineAction(run)
+
+    protected infix fun CoroutineAction.onError(onError: (Exception) -> Unit) = initCoroutine(this.action, onError)
+
+    private fun initCoroutine(run: suspend () -> Unit, onError: (Exception) -> Unit = {}) = launch { withContext(coroutineContext) {
         try {
-            this@onError.action()
+            run()
         } catch (e: Exception) {
             onError(e)
         }
@@ -40,4 +44,4 @@ open class AppViewModel<State> : ViewModel(), CoroutineScope {
     }
 }
 
-inline class CoroutineAction(val action: suspend () -> Any)
+inline class CoroutineAction(val action: suspend () -> Unit)
