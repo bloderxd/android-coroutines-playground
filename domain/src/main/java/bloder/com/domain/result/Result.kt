@@ -1,4 +1,4 @@
-package bloder.com.domain.result
+package br.com.ifood.webservice.response.result
 
 inline class Result<out T>(private val value: Any?) {
 
@@ -9,15 +9,21 @@ inline class Result<out T>(private val value: Any?) {
 
     fun get() : Any? = value
 
+    @Suppress("UNCHECKED_CAST")
+    fun getOrThrow() : T = when(value) {
+        is Failure -> throw value.exception
+        else -> value as T
+    }
+
     open class Failure(val exception: Exception)
 }
 
-inline fun <T, R> Result<T>.map(transform: (T) -> R) : Result<R> = when(get()) {
-    is Result.Failure -> Result(get())
-    else -> Result.ok(transform(get() as T))
+inline fun <T, R> Result<T>.map(transform: (T) -> R) : Result<R> = when(val value = get()) {
+    is Result.Failure -> Result(value)
+    else -> Result.ok(transform(value as T))
 }
 
-inline fun <T, R> Result<T>.flatMap(transform: (T) -> Result<R>) : Result<R> = when(get()) {
-    is Result.Failure -> Result(get())
-    else -> transform(get() as T)
+inline fun <T, R> Result<T>.flatMap(transform: (T) -> Result<R>) : Result<R> = when(val value = get()) {
+    is Result.Failure -> Result(value)
+    else -> transform(value as T)
 }
