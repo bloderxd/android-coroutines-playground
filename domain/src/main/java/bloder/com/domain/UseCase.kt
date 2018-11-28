@@ -1,11 +1,6 @@
 package bloder.com.domain
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import bloder.com.domain.concurrency.defaultCoroutineScope
+import kotlinx.coroutines.CoroutineScope
 
-class UseCase {
-
-    suspend fun <T> runAsync(action: suspend () -> T) : T = GlobalScope.async {
-        action()
-    }.await()
-}
+class UseCase : CoroutineScope by defaultCoroutineScope()
